@@ -1,7 +1,7 @@
 # Onkyo.eISCP
 Yet another ISCP library to control Onkyo AVR receivers over Network using .NET Standard Library.
 
-It's a library inspired by the other GitHub projects miracle2k/onkyo-eiscp-dotnet and hgjensen/onkyo-eiscp-remote-windows. I required something better regarding async programming and wait behavior for the calls for a Xamarin project. It's not by far not complete with all commands. So please download the specs (https://michael.elsdoerfer.name/onkyo/ISCP_AVR_134.xlsx) and a remaining commands.
+It's a library inspired by the other GitHub projects miracle2k/onkyo-eiscp-dotnet and hgjensen/onkyo-eiscp-remote-windows. I required something better regarding async programming and wait behavior for the calls for a Xamarin project. It's not by far not complete with all commands. So please download the specs (https://michael.elsdoerfer.name/onkyo/ISCP_AVR_134.xlsx) and implement remaining commands.
 
 Example:
 ```C#
