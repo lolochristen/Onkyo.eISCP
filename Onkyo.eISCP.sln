@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29613.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Onkyo.eISCP", "Onkyo.eISCP\Onkyo.eISCP.csproj", "{42CF8980-A934-48CA-8D23-EAA3FD1E6F9B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{8B42BA64-D8A8-4E7A-B229-3C409D848D41}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StartZone2TuneIn", "samples\StartZone2TuneIn\StartZone2TuneIn.csproj", "{FE9039DA-DCCB-4D6B-AB3F-CF78EB985EEA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{42CF8980-A934-48CA-8D23-EAA3FD1E6F9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42CF8980-A934-48CA-8D23-EAA3FD1E6F9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42CF8980-A934-48CA-8D23-EAA3FD1E6F9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42CF8980-A934-48CA-8D23-EAA3FD1E6F9B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE9039DA-DCCB-4D6B-AB3F-CF78EB985EEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE9039DA-DCCB-4D6B-AB3F-CF78EB985EEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE9039DA-DCCB-4D6B-AB3F-CF78EB985EEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE9039DA-DCCB-4D6B-AB3F-CF78EB985EEA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{FE9039DA-DCCB-4D6B-AB3F-CF78EB985EEA} = {8B42BA64-D8A8-4E7A-B229-3C409D848D41}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9F8E2B58-FC9D-4627-A077-4B95A0F999CB}
+	EndGlobalSection
+EndGlobal
