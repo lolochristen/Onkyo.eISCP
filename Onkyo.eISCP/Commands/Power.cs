@@ -13,6 +13,8 @@ namespace Onkyo.eISCP.Commands
 
     public class Power : ISCPMessage
     {
+        private bool _systemOn;
+
         public Power() : this(Zone.Main)
         {
         }
@@ -21,7 +23,17 @@ namespace Onkyo.eISCP.Commands
         {
         }
 
-        public bool SystemOn { get; set; }
+        public bool SystemOn
+        {
+            get => _systemOn; set
+            {
+                if (_systemOn != value)
+                {
+                    _systemOn = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
 
         protected override string BuildMessage()
         {

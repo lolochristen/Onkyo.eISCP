@@ -19,8 +19,11 @@ namespace Onkyo.eISCP.Commands
             get => _volumeLevel;
             private set
             {
-                _volumeLevel = value;
-                OnPropertyChanged();
+                if (_volumeLevel != value)
+                {
+                    _volumeLevel = value;
+                    OnPropertyChanged();
+                }
             }
         }
 

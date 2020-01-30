@@ -7,13 +7,25 @@ namespace Onkyo.eISCP.Commands
 {
     public class Mute : ISCPMessage
     {
+        private bool _muted;
+
         public Mute() : this(Zone.Main)
         { }
 
-        public Mute(Zone zone) : base (zone == Zone.Zone2 ? "ZMT" : "AMT")
+        public Mute(Zone zone) : base(zone == Zone.Zone2 ? "ZMT" : "AMT")
         { }
 
-        public bool Muted { get; set; }
+        public bool Muted
+        {
+            get => _muted; set
+            {
+                if (_muted != value)
+                {
+                    _muted = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
 
         protected override string BuildMessage()
         {

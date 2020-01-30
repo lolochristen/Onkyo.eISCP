@@ -47,7 +47,9 @@ namespace Onkyo.eISCP.Commands
 
     public class Input : ISCPMessage
     {
-        public Input() : base ("SLI")
+        private Inputs _selectedInput;
+
+        public Input() : base("SLI")
         {
         }
 
@@ -55,7 +57,17 @@ namespace Onkyo.eISCP.Commands
         {
         }
 
-        public Inputs SelectedInput { get; set; }
+        public Inputs SelectedInput
+        {
+            get => _selectedInput; set
+            {
+                if (_selectedInput != value)
+                {
+                    _selectedInput = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
 
         protected override string BuildMessage()
         {
@@ -67,7 +79,7 @@ namespace Onkyo.eISCP.Commands
         public override void ParseFrom(ISCPMessage source)
         {
             base.ParseFrom(source);
-            SelectedInput = (Inputs) int.Parse(RawData, System.Globalization.NumberStyles.HexNumber);
+            SelectedInput = (Inputs)int.Parse(RawData, System.Globalization.NumberStyles.HexNumber);
         }
     }
 
