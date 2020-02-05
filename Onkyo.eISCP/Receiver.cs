@@ -1,6 +1,7 @@
 ﻿using Onkyo.eISCP.Commands;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -17,7 +18,7 @@ namespace Onkyo.eISCP
         public Input Zone2Input { get; protected set; }
 
         public NetListInfo NetListCursorInfo { get; protected set; }
-        public List<NetListInfo> NetListItems { get; protected set; }
+        public ObservableCollection<NetListInfo> NetListItems { get; protected set; }
 
         public Receiver()
         {
@@ -29,7 +30,7 @@ namespace Onkyo.eISCP
             MainInput = new Input(Zone.Main);
             Zone2Input = new Input(Zone.Zone2);
             NetListCursorInfo = new NetListInfo();
-            NetListItems = new List<NetListInfo>();
+            NetListItems = new ObservableCollection<NetListInfo>();
             MessageReceived += OnMessageReceived;
         }
 

@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Onkyo.eISCP", "Onkyo.eISCP\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{8B42BA64-D8A8-4E7A-B229-3C409D848D41}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StartZone2TuneIn", "samples\StartZone2TuneIn\StartZone2TuneIn.csproj", "{FE9039DA-DCCB-4D6B-AB3F-CF78EB985EEA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StartZone2TuneIn", "samples\StartZone2TuneIn\StartZone2TuneIn.csproj", "{FE9039DA-DCCB-4D6B-AB3F-CF78EB985EEA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Onkyo.eISCP.Tests", "Onkyo.eISCP.Tests\Onkyo.eISCP.Tests.csproj", "{84B38033-C357-417F-9ECF-86F8F3818715}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,6 +25,10 @@ Global
 		{FE9039DA-DCCB-4D6B-AB3F-CF78EB985EEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FE9039DA-DCCB-4D6B-AB3F-CF78EB985EEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FE9039DA-DCCB-4D6B-AB3F-CF78EB985EEA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84B38033-C357-417F-9ECF-86F8F3818715}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84B38033-C357-417F-9ECF-86F8F3818715}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84B38033-C357-417F-9ECF-86F8F3818715}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84B38033-C357-417F-9ECF-86F8F3818715}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

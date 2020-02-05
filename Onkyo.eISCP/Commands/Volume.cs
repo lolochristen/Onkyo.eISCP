@@ -17,7 +17,7 @@ namespace Onkyo.eISCP.Commands
         public short VolumeLevel
         {
             get => _volumeLevel;
-            private set
+            set
             {
                 if (_volumeLevel != value)
                 {
@@ -36,6 +36,11 @@ namespace Onkyo.eISCP.Commands
             else
                 VolumeLevel = short.Parse(source.RawData, System.Globalization.NumberStyles.HexNumber);
         }
+
+        protected override string BuildMessage()
+        {
+            return _volumeLevel.ToString("X2");
+        }
     }
 
     public static class VolumeExtensions
@@ -48,6 +53,11 @@ namespace Onkyo.eISCP.Commands
         public static async Task<Volume> SetVolumeDownAsync(this ISCPConnection connection, Zone zone = Zone.Main)
         {
             return await connection.SendCommandAsync<Volume>(new Volume(zone) { RawData = "DOWN" });
+        }
+
+        public static async Task<Volume> SetVolumeAsync(this ISCPConnection connection, short volume, Zone zone = Zone.Main)
+        {
+            return await connection.SendCommandAsync<Volume>(new Volume(zone) { VolumeLevel = volume });
         }
 
         public static async Task<Volume> GetVolumeAsync(this ISCPConnection connection, Zone zone = Zone.Main)
