@@ -24,11 +24,11 @@ namespace Onkyo.eISCP.Commands
         }
     }
 
-    public static class NNetListInfoSelectExtensions
+    public static class NetListInfoSelectExtensions
     {
         public static async Task SelectNetListInfoByIndex(this ISCPConnection connection, short index)
         {
-            await connection.SendCommandAsync(new NetListInfoSelect() { IndexNbr = index });
+            await connection.SendCommandAsync(new NetListInfoSelect() { IndexNbr = index }, 10000);
             connection.MessageProcessingWaitHandle.WaitOne();
         }
     }

@@ -24,6 +24,7 @@ namespace Onkyo.eISCP.Commands
                 Title = Encoding.Default.GetString(Encoding.UTF8.GetBytes(RawData));
             else
                 Title = "";
+            OnPropertyChanged(nameof(Title));
         }
     }
 

@@ -26,7 +26,7 @@ namespace Onkyo.eISCP.Commands
                 }
             }
         }
-
+  
         public override void ParseFrom(ISCPMessage source)
         {
             base.ParseFrom(source);
@@ -40,6 +40,17 @@ namespace Onkyo.eISCP.Commands
         protected override string BuildMessage()
         {
             return _volumeLevel.ToString("X2");
+        }
+    }
+
+    public class VolumeStatus : Volume
+    {
+        public VolumeStatus(Zone zone = Zone.Main) : base(zone)
+        { }
+
+        protected override string BuildMessage()
+        {
+            return "QSTN";
         }
     }
 
@@ -62,7 +73,7 @@ namespace Onkyo.eISCP.Commands
 
         public static async Task<Volume> GetVolumeAsync(this ISCPConnection connection, Zone zone = Zone.Main)
         {
-            return await connection.SendCommandAsync<Volume>(new Volume(zone) { RawData = "QSTN" });
+            return await connection.SendCommandAsync<Volume>(new VolumeStatus(zone));
         }
     }
 }

@@ -19,6 +19,8 @@ namespace Onkyo.eISCP
         private ManualResetEventSlim _messageProcessingResetEvent;
         private CancellationTokenSource _listenerCancellationToken;
 
+        public bool Connected => _client != null && _client.Connected;
+
         public void Connect(IPAddress address, int port = 60128)
         {
             Connect(new IPEndPoint(address, port));
@@ -107,7 +109,7 @@ namespace Onkyo.eISCP
 
                                 if (msg != null)
                                 {
-                                    System.Diagnostics.Trace.WriteLine($"{DateTime.Now:O} Recevied {msg.ToString()}");
+                                    System.Diagnostics.Trace.WriteLine($"{DateTime.Now:O} Received {msg.ToString()}");
                                     MessageReceived?.Invoke(this, new ISCPMessageEventArgs() { Message = msg });
                                 }
                             }
@@ -169,27 +171,53 @@ namespace Onkyo.eISCP
             try
             {
                 MessageReceived += messsageHandler;
-
-                System.Diagnostics.Trace.WriteLine($"{DateTime.Now:O} Send {message.ToString()}");
+                System.Diagnostics.Trace.WriteLine($"{DateTime.Now:O} Send:{message.ToString()}");
 
                 var bytes = message.GetBytes();
                 await _networkStream.WriteAsync(bytes, 0, bytes.Length);
 
                 var timeout = !wait.Wait(millisecondsTimeout);
-
-                System.Diagnostics.Trace.WriteLine($"{DateTime.Now:O} Send {message.Command} Timeout({millisecondsTimeout}):{timeout} Response {response.ToString()}");
-
-                return response;
             }
             catch (Exception exp)
             {
-                return null;
+                System.Diagnostics.Trace.WriteLine($"{DateTime.Now:O} Error ({message.ToString()}):{exp.ToString()}");
+                throw exp;
             }
             finally
             {
                 MessageReceived -= messsageHandler; // detach!
             }
+
+            if (response != null)
+                System.Diagnostics.Trace.WriteLine($"{DateTime.Now:O} Response({message.Command}):{response.ToString()}");
+            else
+            {
+                System.Diagnostics.Trace.WriteLine($"{DateTime.Now:O} Response timeout ({message.Command}, {millisecondsTimeout} ms).");
+                throw new TimeoutException("Response timeout ({message.Command}, {millisecondsTimeout} ms).");
+            }
+
+            return response;
         }
+
+        public async Task<ISCPMessage> SendCommandWithRetryAsync(ISCPMessage message, int nbrOfRetries = 3, int millisecondsTimeout = 2000, Func<ISCPMessage, ISCPMessage, bool> acceptedResponseFunc = null)
+        {
+            int i = 0;
+            ISCPMessage response = null;
+            while (i < nbrOfRetries)
+            {
+                try
+                {
+                    response = await SendCommandAsync(message, millisecondsTimeout, acceptedResponseFunc);
+                    break;
+                }
+                catch(TimeoutException)
+                {
+                    i++;
+                }
+            }
+            return response;
+        }
+
 
         protected bool DefaultResponseAcceptFunc(ISCPMessage originalMessage, ISCPMessage receivedMessage)
         {
@@ -339,7 +367,7 @@ namespace Onkyo.eISCP
 
             if (receiver == null)
             {
-                throw new InvalidOperationException("Not Recevier found");
+                throw new InvalidOperationException("No Receivier found.");
             }
 
             await ConnectAsync(receiver);

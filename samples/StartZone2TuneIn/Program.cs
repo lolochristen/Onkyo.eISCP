@@ -39,7 +39,28 @@ namespace StartZone2TuneIn
 
             await receiver.SelectNetListInfoByIndex(1); // first Preset
 
-            var title = await receiver.GetNetTitleNameAsync();
+            Console.WriteLine("[ENTER]");
+            Console.ReadKey();
+
+            await receiver.SetNetServiceAsync(NetServices.TuneInRadio);
+
+            await receiver.SelectNetListInfoByIndex(1); // first item > Presets
+
+            await receiver.SelectNetListInfoByIndex(2); // second Preset
+
+            Console.WriteLine("[ENTER]");
+            Console.ReadKey();
+
+            await receiver.SetNetServiceAsync(NetServices.TuneInRadio);
+
+            await receiver.SelectNetListInfoByIndex(1); // first item > Presets
+
+            await receiver.SelectNetListInfoByIndex(3); // third Preset
+
+            Console.WriteLine("[ENTER]");
+            Console.ReadKey();
+
+            await receiver.PowerStandbyAsync(Zone.Zone2);
 
             receiver.Disconnect();
         }

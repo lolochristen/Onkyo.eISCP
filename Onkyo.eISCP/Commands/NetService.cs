@@ -57,9 +57,8 @@ namespace Onkyo.eISCP.Commands
     {
         public static async Task SetNetServiceAsync(this ISCPConnection connection, NetServices service)
         {
-            await connection.SendCommandAsync(new NetService() { Serivce = service }, 5000, (om, sm) => sm.Command == "NLS"); // after sending NSV, NLT + NLS (many) are expected
+            await connection.SendCommandAsync(new NetService() { Serivce = service }, 10000, (om, sm) => sm.Command == "NLS"); // after sending NSV, NLT + NLS (many) are expected
             connection.MessageProcessingWaitHandle.WaitOne();
-
         }
     }
 }

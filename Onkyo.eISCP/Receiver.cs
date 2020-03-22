@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace Onkyo.eISCP
 {
@@ -19,7 +20,13 @@ namespace Onkyo.eISCP
 
         public NetListInfo NetListCursorInfo { get; protected set; }
         public ObservableCollection<NetListInfo> NetListItems { get; protected set; }
+        public NetJacketArt NetJacketArt { get; protected set; }
+        public NetAlbumName NetAlbumName { get; protected set; }
+        public NetArtistName NetArtistName { get; protected set; }
+        public NetTrackFileInfo NetTrackFileInfo { get; protected set; }
 
+        public NetTitleName NetTitleName { get; set; }
+ 
         public Receiver()
         {
             MainPower = new Power(Zone.Main);
@@ -29,8 +36,15 @@ namespace Onkyo.eISCP
             NetListTitle = new NetListTitleInfo();
             MainInput = new Input(Zone.Main);
             Zone2Input = new Input(Zone.Zone2);
+
             NetListCursorInfo = new NetListInfo();
             NetListItems = new ObservableCollection<NetListInfo>();
+            NetTitleName = new NetTitleName();
+            NetJacketArt = new NetJacketArt();
+            NetAlbumName = new NetAlbumName();
+            NetArtistName = new NetArtistName();
+            NetTrackFileInfo = new NetTrackFileInfo();
+
             MessageReceived += OnMessageReceived;
         }
 
@@ -80,6 +94,21 @@ namespace Onkyo.eISCP
                             NetListItems.Add(nls);
                     }
                     break;
+                case "NTI":
+                    NetTitleName.ParseFrom(e.Message);
+                    break;
+                case "NAL":
+                    NetAlbumName.ParseFrom(e.Message);
+                    break;
+                case "NAT":
+                    NetArtistName.ParseFrom(e.Message);
+                    break;
+                case "NJA":
+                    NetJacketArt.ParseFrom(e.Message);
+                    break;
+                case "NFI":
+                    NetTrackFileInfo.ParseFrom(e.Message);
+                    break;
             }
         }
 
@@ -96,6 +125,14 @@ namespace Onkyo.eISCP
             await this.GetInputAsync(Zone.Zone2);
 
             await this.GetNetListTitleInfoAsync();
+        }
+
+        public async Task<bool> IsConnectedAsync()
+        {
+            if (!Connected)
+                return false;
+            var power = await SendCommandAsync<Power>(new PowerStatus(Zone.Main));
+            return power != null;
         }
     }
 }
